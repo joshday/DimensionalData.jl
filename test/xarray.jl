@@ -96,7 +96,7 @@ end
     @test_throws ArgumentError pyconvert(DimStack, x)
     @test pyconvert(DimStack, x, 42) == 42
 
-    # Data variable names that shadow Dataset attributes must still resolve.
+    # Test variables "dims" and "attrs", which collide with xr.Dataset attributes.
     dataset2 = xr.Dataset(Dict("dims" => x, "attrs" => x2))
     z2 = pyconvert(DimStack, dataset2)
     @test Set(name(z2)) == Set((:dims, :attrs))
